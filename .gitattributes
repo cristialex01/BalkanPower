@@ -1,0 +1,3 @@
+# Prevent from polluting the git working directory in Windows
+package.json text eol=lf
+package-lock.json text eol=lf

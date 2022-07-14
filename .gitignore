@@ -1,0 +1,33 @@
+# mvn
+target/
+assembly/
+
+# gradle
+.gradle/
+build/
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
+# idea
+*.iml
+idea
+.idea
+.idea-modules
+node_modules/
+
+# spring
+application-LOCAL.properties
+
+# logs
+*.log
+*.tmp
+*.log.*.gz
+*.gz
+
+# vaadin
+*package-lock.json
+webpack.generated.js
+
+# database
+*.mv.db
+*.db

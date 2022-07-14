@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="NewtifyWebApplication" type="Application" factoryName="Application">
+        <option name="ALTERNATIVE_JRE_PATH" value="BUNDLED"/>
+        <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true"/>
+        <option name="MAIN_CLASS_NAME" value="sk.best.newtify.web.bootstrap.NewtifyWebApplication"/>
+        <module name="newtify-web"/>
+        <shortenClasspath name="ARGS_FILE"/>
+        <option name="VM_PARAMETERS" value="-Dvaadin.enableDevServer=true"/>
+        <method v="2">
+            <option name="Make" enabled="true"/>
+        </method>
+    </configuration>
+</component>

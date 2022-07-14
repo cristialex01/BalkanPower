@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="NewtifyDatabaseInitializer" type="JUnit" factoryName="JUnit"
+                   nameIsGenerated="true">
+        <module name="newtify-backend"/>
+        <extension name="coverage">
+            <pattern>
+                <option name="PATTERN" value="sk.best.newtify.backend.bootstrap.test.*"/>
+                <option name="ENABLED" value="true"/>
+            </pattern>
+        </extension>
+        <option name="PACKAGE_NAME" value="sk.best.newtify.backend.bootstrap.test"/>
+        <option name="MAIN_CLASS_NAME" value="sk.best.newtify.backend.bootstrap.test.NewtifyDatabaseInitializer"/>
+        <option name="METHOD_NAME" value=""/>
+        <option name="TEST_OBJECT" value="class"/>
+        <option name="WORKING_DIRECTORY" value="$ProjectFileDir$"/>
+        <method v="2">
+            <option name="Make" enabled="true"/>
+        </method>
+    </configuration>
+</component>
