@@ -29,7 +29,7 @@ import javax.annotation.PostConstruct;
 @Getter
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class ArticleEditor extends VerticalLayout {
+public class    ArticleEditor extends VerticalLayout {
 
     private static final long serialVersionUID = -404447830994215437L;
 

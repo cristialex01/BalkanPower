@@ -14,6 +14,7 @@ public enum TopicType {
 
     MUSIC("MUSIC");
 
+
     private String value;
 
     TopicType(String value) {

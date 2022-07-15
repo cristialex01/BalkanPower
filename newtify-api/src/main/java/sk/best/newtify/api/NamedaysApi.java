@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-14T11:20:06.631668800+02:00[Europe/Budapest]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-14T11:39:24.924332600+02:00[Europe/Budapest]")
 @Validated
 @Tag(name = "Namedays", description = "Group of endpoints to handle operations with name day")
 public interface NamedaysApi {

@@ -19,6 +19,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 import sk.best.newtify.api.dto.ETopicType;
 
 import javax.annotation.PostConstruct;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +35,9 @@ import java.util.Optional;
 @JsModule("./styles/custom-styles.js")
 @CssImport(value = "./styles/navbar/newtify-navbar.css", themeFor = "vaadin-app-layout")
 public class MainLayout extends AppLayout {
+
+    Map<ETopicType, Tab> topic2Tab = new HashMap<>();
+    Tabs tabs = new Tabs(true);
 
     private static final long serialVersionUID = 4107656392983873277L;
 
@@ -56,9 +60,6 @@ public class MainLayout extends AppLayout {
     }
 
     private void createTabs() {
-        Tabs tabs = new Tabs(true);
-
-        Map<ETopicType, Tab> topic2Tab = new HashMap<>();
 
         for (ETopicType topic : ETopicType.values()) {
             Tab topicTab = new Tab();
@@ -102,9 +103,24 @@ public class MainLayout extends AppLayout {
             UI.getCurrent().navigate(ETopicType.NEWS.getValue().toLowerCase());
             return;
         }
-
         if (tabId.equals(ETopicType.GAMING.getValue())) {
             UI.getCurrent().navigate(ETopicType.GAMING.getValue().toLowerCase());
+            return;
+        }
+        if (tabId.equals(ETopicType.FASHION.getValue())) {
+            UI.getCurrent().navigate(ETopicType.FASHION.getValue().toLowerCase());
+            return;
+        }
+        if (tabId.equals(ETopicType.FINANCE.getValue())) {
+            UI.getCurrent().navigate(ETopicType.FINANCE.getValue().toLowerCase());
+            return;
+        }
+        if (tabId.equals(ETopicType.MOVIE.getValue())) {
+            UI.getCurrent().navigate(ETopicType.MOVIE.getValue().toLowerCase());
+            return;
+        }
+        if (tabId.equals(ETopicType.MUSIC.getValue())) {
+            UI.getCurrent().navigate(ETopicType.MUSIC.getValue().toLowerCase());
             return;
         }
 
@@ -119,6 +135,18 @@ public class MainLayout extends AppLayout {
             case GAMING:
                 topicTab.add(VaadinIcon.GAMEPAD.create());
                 break;
+            case FASHION:
+                topicTab.add(VaadinIcon.FAMILY.create());
+                break;
+            case FINANCE:
+                topicTab.add(VaadinIcon.EURO.create());
+                break;
+            case MOVIE:
+                topicTab.add(VaadinIcon.MOVIE.create());
+                break;
+            case MUSIC:
+                topicTab.add(VaadinIcon.MUSIC.create());
+                break;
             default:
                 topicTab.setEnabled(false);
                 // no-op
@@ -132,7 +160,22 @@ public class MainLayout extends AppLayout {
         title.getStyle()
                 .set("font-size", "var(--lumo-font-size-l)")
                 .set("margin", "0 0 0 0.5em");
+
         Icon titleIcon = VaadinIcon.NEWSPAPER.create();
+        titleDiv.addClickListener(divClickEvent -> {
+            UI.getCurrent().navigate(ETopicType.NEWS.getValue().toLowerCase());
+
+            UI.getCurrent().getPage().fetchCurrentURL(url -> {
+                Optional<ETopicType> topicOpt = Arrays.stream(ETopicType.values())
+                        .filter(topicType -> url.getPath().contains(topicType.getValue().toLowerCase()))
+                        .findFirst();
+
+                topicOpt.ifPresent(topicType -> {
+                    tabs.setSelectedTab(topic2Tab.get(topicType));
+                });
+            });
+        });
+
 
         titleDiv.add(titleIcon, title);
         titleDiv.getStyle()

@@ -27,8 +27,32 @@ import java.util.Locale;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class NameDayWidgetComponent extends FlexLayout {
 
+    //Get the suffix
+    private static String getDayNumberSuffix(int day) {
+        if (day >= 11 && day <= 13) {
+            return "th";
+        }
+        switch (day % 10) {
+            case 1:
+                return "st";
+            case 2:
+                return "nd";
+            case 3:
+                return "rd";
+            default:
+                return "th";
+        }
+    }
+
+    //Put the suffix in a variable
+    public static String dayNumberSuffix = getDayNumberSuffix(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
     private static final long              serialVersionUID    = 1414727226197592073L;
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d LLLL uuuu", Locale.ENGLISH);
+
+    //Date format for month and year
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("LLLL uuuu", Locale.ENGLISH);
+
+    //Date format for the day of the year
+    private static final DateTimeFormatter DAY_FORMATTER = DateTimeFormatter.ofPattern("d", Locale.ENGLISH);
 
     private final NamedaysApi namedaysApi;
 
@@ -69,8 +93,10 @@ public class NameDayWidgetComponent extends FlexLayout {
         todayDateTitle.getStyle()
                 .set("color", "var(--lumo-contrast-color)");
 
-        H3 todayDateValue = new H3(DATE_TIME_FORMATTER.format(
-                LocalDate.of(currentYear, currentMonth, currentDay))
+        //Write the day, the suffix and the rest of the date
+        H3 todayDateValue = new H3(DAY_FORMATTER.format(
+                LocalDate.of(currentYear, currentMonth, currentDay)) + dayNumberSuffix + " of " +
+                DATE_TIME_FORMATTER.format(LocalDate.of(currentYear, currentMonth, currentDay))
         );
         todayDateValue.getStyle()
                 .set("color", "white")

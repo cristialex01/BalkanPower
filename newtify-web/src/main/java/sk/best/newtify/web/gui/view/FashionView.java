@@ -1,16 +1,15 @@
 package sk.best.newtify.web.gui.view;
 
-import ch.qos.logback.core.pattern.color.GreenCompositeConverter;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteAlias;
 import org.springframework.beans.factory.ObjectFactory;
 import sk.best.newtify.api.ArticlesApi;
 import sk.best.newtify.api.dto.ArticleDTO;
+import sk.best.newtify.api.dto.ETopicType;
 import sk.best.newtify.web.gui.component.article.ArticlePreviewComponent;
-import sk.best.newtify.web.gui.component.widget.*;
+import sk.best.newtify.web.gui.component.widget.NameDayWidgetComponent;
 import sk.best.newtify.web.gui.layout.MainLayout;
 
 import javax.annotation.PostConstruct;
@@ -22,19 +21,15 @@ import java.util.List;
  * Copyright © 2022 BEST Technická univerzita Košice.
  * All rights reserved.
  */
-@PageTitle("News")
-@RouteAlias(value = "", layout = MainLayout.class)
-@Route(value = "news", layout = MainLayout.class)
-public class NewsView extends FlexLayout {
+@PageTitle("Fashion")
+@Route(value = "fashion", layout = MainLayout.class)
+public class FashionView extends FlexLayout {
 
     private static final long serialVersionUID = 4107656392983873277L;
 
     private final ArticlesApi                            articlesApi;
     private final ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory;
     private final ObjectFactory<NameDayWidgetComponent>  nameDayWidgetComponentObjectFactory;
-    private final ObjectFactory<KanyeWidget> kanyeWidgetObjectFactory;
-    private final ObjectFactory<RandomJokesWidget> randomJokesWidgetObjectFactory;
-    private final ObjectFactory<ChuckNorrisWidget> chuckNorrisWidgetObjectFactory;
 
     private final VerticalLayout middleContent      = new VerticalLayout();
     private final VerticalLayout leftWidgetContent  = new VerticalLayout();
@@ -42,17 +37,12 @@ public class NewsView extends FlexLayout {
 
     private List<ArticleDTO> articles = Collections.emptyList();
 
-    public NewsView(ArticlesApi articlesApi,
-                    ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory,
-                    ObjectFactory<NameDayWidgetComponent> nameDayWidgetComponentObjectFactory,
-                    ObjectFactory<KanyeWidget> kanyeWidgetObjectFactory, ObjectFactory<RandomJokesWidget> randomJokesWidgetObjectFactory,
-                    ObjectFactory<ChuckNorrisWidget> chuckNorrisWidgetObjectFactory) {
+    public FashionView(ArticlesApi articlesApi,
+                       ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory,
+                       ObjectFactory<NameDayWidgetComponent> nameDayWidgetComponentObjectFactory) {
         this.articlesApi                         = articlesApi;
         this.articlePreviewObjectFactory         = articlePreviewObjectFactory;
         this.nameDayWidgetComponentObjectFactory = nameDayWidgetComponentObjectFactory;
-        this.kanyeWidgetObjectFactory = kanyeWidgetObjectFactory;
-        this.randomJokesWidgetObjectFactory = randomJokesWidgetObjectFactory;
-        this.chuckNorrisWidgetObjectFactory = chuckNorrisWidgetObjectFactory;
     }
 
     @PostConstruct
@@ -83,10 +73,6 @@ public class NewsView extends FlexLayout {
         rightWidgetContent.setAlignItems(Alignment.CENTER);
         setFlexShrink(2, rightWidgetContent);
         setFlexGrow(1, rightWidgetContent);
-
-        KanyeWidget kanyeWidget = kanyeWidgetObjectFactory.getObject();
-        ChuckNorrisWidget chuckNorrisWidget = chuckNorrisWidgetObjectFactory.getObject();
-        rightWidgetContent.add(kanyeWidget, chuckNorrisWidget);
     }
 
     private void createLeftWidgetPane() {
@@ -96,11 +82,11 @@ public class NewsView extends FlexLayout {
         setFlexGrow(1, leftWidgetContent);
 
         NameDayWidgetComponent nameDayWidget = nameDayWidgetComponentObjectFactory.getObject();
-        RandomJokesWidget randomJokesWidget = randomJokesWidgetObjectFactory.getObject();
-        leftWidgetContent.add(nameDayWidget, randomJokesWidget);
+        leftWidgetContent.add(nameDayWidget);
     }
 
     private void fetchArticles() {
-        articles = articlesApi.retrieveArticles(null).getBody();
+        articles = articlesApi.retrieveArticles(ETopicType.FASHION.getValue()).getBody();
     }
+
 }

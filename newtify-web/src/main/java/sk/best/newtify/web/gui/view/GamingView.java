@@ -9,6 +9,7 @@ import sk.best.newtify.api.ArticlesApi;
 import sk.best.newtify.api.dto.ArticleDTO;
 import sk.best.newtify.api.dto.ETopicType;
 import sk.best.newtify.web.gui.component.article.ArticlePreviewComponent;
+import sk.best.newtify.web.gui.component.widget.GeekJokeWidget;
 import sk.best.newtify.web.gui.component.widget.NameDayWidgetComponent;
 import sk.best.newtify.web.gui.layout.MainLayout;
 
@@ -30,6 +31,7 @@ public class GamingView extends FlexLayout {
     private final ArticlesApi                            articlesApi;
     private final ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory;
     private final ObjectFactory<NameDayWidgetComponent>  nameDayWidgetComponentObjectFactory;
+    private final ObjectFactory<GeekJokeWidget> geekJokeWidgetObjectFactory;
 
     private final VerticalLayout middleContent      = new VerticalLayout();
     private final VerticalLayout leftWidgetContent  = new VerticalLayout();
@@ -39,10 +41,12 @@ public class GamingView extends FlexLayout {
 
     public GamingView(ArticlesApi articlesApi,
                       ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory,
-                      ObjectFactory<NameDayWidgetComponent> nameDayWidgetComponentObjectFactory) {
+                      ObjectFactory<NameDayWidgetComponent> nameDayWidgetComponentObjectFactory,
+                      ObjectFactory<GeekJokeWidget> geekJokeWidgetObjectFactory) {
         this.articlesApi                         = articlesApi;
         this.articlePreviewObjectFactory         = articlePreviewObjectFactory;
         this.nameDayWidgetComponentObjectFactory = nameDayWidgetComponentObjectFactory;
+        this.geekJokeWidgetObjectFactory = geekJokeWidgetObjectFactory;
     }
 
     @PostConstruct
@@ -73,6 +77,9 @@ public class GamingView extends FlexLayout {
         rightWidgetContent.setAlignItems(Alignment.CENTER);
         setFlexShrink(2, rightWidgetContent);
         setFlexGrow(1, rightWidgetContent);
+
+        GeekJokeWidget geekJokeWidget = geekJokeWidgetObjectFactory.getObject();
+        rightWidgetContent.add(geekJokeWidget);
     }
 
     private void createLeftWidgetPane() {
